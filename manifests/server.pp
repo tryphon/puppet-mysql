@@ -182,7 +182,7 @@ class mysql::server {
 
   $echo_command = $lsbdistcodename ? {
     "squeeze" => "echo", # -e is default under squeeze sh
-    default => "echo -e"
+    default => "echo"
   }
 
   exec { "Generate my.cnf":
