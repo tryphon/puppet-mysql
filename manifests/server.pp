@@ -44,7 +44,7 @@ class mysql::server {
       },
       $operatingsystem ? {
         RedHat => "set log-slow-queries /var/log/mysql-slow-queries.log",
-        default => "set set log-slow-queries /var/log/mysql/mysql-slow.log",
+        default => "set log-slow-queries /var/log/mysql/mysql-slow.log",
       },
       #"ins log-slow-admin-statements after log-slow-queries", # BUG: not implemented in puppet yet
       $operatingsystem ? {
@@ -183,7 +183,7 @@ class mysql::server {
   $echo_command = $lsbdistcodename ? {
     "squeeze" => "echo", # -e is default under squeeze sh
     default => "echo -e"
-  } 
+  }
 
   exec { "Generate my.cnf":
     command     => "$echo_command \"[mysql]\nuser=${mysql_user}\npassword=${mysql_password}\n[mysqladmin]\nuser=${mysql_user}\npassword=${mysql_password}\n[mysqldump]\nuser=${mysql_user}\npassword=${mysql_password}\n[mysqlshow]\nuser=${mysql_user}\npassword=${mysql_password}\n\" > /root/.my.cnf",
